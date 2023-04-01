@@ -1,0 +1,5 @@
+streamlit ==1.19.0
+tushare==1.2.83
+statsmodels==0.12.0
+pandas==1.1.3
+time==1.0.0
