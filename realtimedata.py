@@ -50,7 +50,7 @@ def get_historydata():
         #获取历史数据
         df = pro.daily(ts_code= codei, start_date='20210101').sort_values('trade_date',ascending=True)
         latestdate=df.trade_date[0]
-        df.to_csv("./historycsv/"+i+"_"+latestdate+".csv")
+        df.to_csv("historycsv/"+i+"_"+latestdate+".csv")
         time.sleep(random.uniform(1,3))
 
 
