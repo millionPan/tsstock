@@ -35,26 +35,12 @@ symbollist=['600588','600986','600728','600050','000070',
 
 
    #获取历史数据
-def get_historydata():   
-    #数字代码添加后缀成code
-    for i in symbollist:
-        #print(i[0])
-        if i[0]=='0':
-            codei=i+'.SZ'
-        else:
-            codei=i+'.SH'  
-        #获取历史数据
-        df = pro.daily(ts_code= codei, start_date='20210101').sort_values('trade_date',ascending=True)
-        latestdate=df.trade_date[0]
-        df.to_csv("./historycsv/"+i+"_"+latestdate+".csv")
-        time.sleep(random.uniform(1,3))
-
 
 
 
  
 if st.button('更新历史数据'):
-    get_historydata()
+    
     st.write('get!')
 else:
     st.write('Goodbye')
