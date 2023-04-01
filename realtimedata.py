@@ -18,6 +18,8 @@ st.set_page_config(
 # import os
 # st.write(os.getcwd())   #取得当前工作目录
 
+import tushare as ts
+pro = ts.pro_api('e79d0344d6ac178e4d5973c42b612c9ed776bc47117c49aa9d3d7b24')
 
 
 
