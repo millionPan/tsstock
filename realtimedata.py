@@ -24,11 +24,12 @@ pro = ts.pro_api('e79d0344d6ac178e4d5973c42b612c9ed776bc47117c49aa9d3d7b24')
 import time
 import random
 import pandas as pd 
+
 #print(ts.__version__)
                 
 symbollist=['600588','600986','600728','600050','000070']
 
-history=pd.read_csv("./historycsv/"+'000070'+"_"+'20230330'+".csv")      
-st.write(history.shape[0])
+   
+st.write(symbollist)
 
 
