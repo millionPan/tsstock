@@ -25,7 +25,7 @@ import time
 import random
 import pandas as pd 
 import statsmodels
-import statsmodels.formula.api 
+import statsmodels.formula
 #print(ts.__version__)
                 
 symbollist=['600588','600986','600728','600050','000070']
