@@ -23,8 +23,8 @@ pro = ts.pro_api('e79d0344d6ac178e4d5973c42b612c9ed776bc47117c49aa9d3d7b24')
 
 import time
 import random
-import statsmodels.formula.api as smf
-import pandas as pd 
+#import statsmodels.formula.api as smf
+#import pandas as pd 
 #print(ts.__version__)
 # import os
 # st.write(os.getcwd())   #取得当前工作目录
