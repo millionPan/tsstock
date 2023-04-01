@@ -26,7 +26,7 @@ import random
 import statsmodels.formula.api as smf
 import pandas as pd 
 #print(ts.__version__)
-                
+           
 symbollist=['600588','600986','600728','600050','000070']
 
 history=pd.read_csv("./historycsv/"+'000070'+"_"+'20230330'+".csv")      
