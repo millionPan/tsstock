@@ -25,7 +25,7 @@ import time
 import random
 import pandas as pd 
 
-import statsmodels.formula
+import statsmodels.formula as smf
 
 #print(ts.__version__)
                 
