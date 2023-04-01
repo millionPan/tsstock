@@ -29,13 +29,7 @@ import pandas as pd
 # import os
 # st.write(os.getcwd())   #取得当前工作目录
 
-symbollist=['600588','600986','600728','600050','000070',
-            '603887','601390','000537',
-            '000803','002236','002415',
-            '002370','600071','603626',
-            '603881','600918','600543',
-            '601766','000526',
-            '603138']
+symbollist=['600588']
 
 
 #获取历史数据
@@ -49,10 +43,8 @@ def get_historydata():
             codei=i+'.SH'  
         #获取历史数据
         df = pro.daily(ts_code= codei, start_date='20210101').sort_values('trade_date',ascending=True)
-        latestdate=df.trade_date[0]
-        df.to_csv("tsstock/historycsv/"+i+"_"+latestdate+".csv")
         time.sleep(random.uniform(1,3))
-
+        return df
 
 
    #获取历史数据
@@ -61,8 +53,9 @@ def get_historydata():
 
  
 if st.button('更新历史数据'):
-    get_historydata()
+    df = get_historydata()
     st.write('get!')
+    st.dataframe(df)
 else:
     st.write('Goodbye')
     
