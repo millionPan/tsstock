@@ -63,7 +63,9 @@ def get_olsparams(symbollist):
             'predict_low_params':pd.to_numeric(model_low.params),
             'predict_high_params':pd.to_numeric(model_high.params),
             'open_low_corr':historydata['open'].corr(historydata['low']),
-            'open_high_corr':historydata['open'].corr(historydata['high'])
+            'open_high_corr':historydata['open'].corr(historydata['high']),
+            'enddate':historydata['trade_date'][0]
+            
               })
         olsparams=pd.concat([olsparams,olsdata],ignore_index=True) 
         time.sleep(random.uniform(1,3))
@@ -101,15 +103,16 @@ def get_have():
 if st.button('更新实时价格'):
         have=get_have()
         olsparams=get_olsparams(symbollist) 
+        st.write("历史数据更新至"+olsparams['enddate'][0])
         realtimedata=get_realtimedata(symbollist)
         latestdata=(olsparams
                     .merge(realtimedata,on='ts_code',how='left')
                     .merge(have,on='ts_code',how='outer')
                     )
-        latestdata['income']=(latestdata['price']-latestdata['buy'])*latestdata['quant']
+        latestdata['income']=round((latestdata['price']-latestdata['buy'])*latestdata['quant']-(latestdata['price']*latestdata['quant']*1/1000+latestdata['price']*latestdata['quant']*0.02/1000+5),2)
         latestdata['predict_low']=round(latestdata['predict_low_params']*latestdata['open'],2)
         latestdata['predict_high']=round(latestdata['predict_high_params']*latestdata['open'],2)
-    
+   
         latestdata['diff']=round((latestdata['price']-latestdata['predict_low'])/(latestdata['predict_high']-latestdata['predict_low']),2)
         latestdata['range']=round((latestdata['predict_high_params']-latestdata['predict_low_params']),3)
         
@@ -124,6 +127,10 @@ if st.button('更新实时价格'):
                                       'buy','quant','range','open_low_corr','open_high_corr']]
                           .sort_values(by=["diff"],ascending=True))
         st.dataframe(latestdata_show)
+        st.write(round(latestdata_show['income'].sum(),2))
+        st.write("实时数据更新至"+''+latestdata['date'][0]+' '+latestdata['time'][0])
+        
     #st.table(latestdata_show)
 else:
     st.write('')
+
