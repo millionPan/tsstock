@@ -27,7 +27,7 @@ import statsmodels.formula.api as smf
 import pandas as pd 
 #print(ts.__version__)
            
-symbollist=['600588']
+symbollist=['600588','600986','600728']
 
 
 #回归系数及相关系数
