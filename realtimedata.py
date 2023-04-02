@@ -68,7 +68,7 @@ def get_olsparams(symbollist):
             
               })
         olsparams=pd.concat([olsparams,olsdata],ignore_index=True) 
-        time.sleep(random.uniform(1,3))
+        time.sleep(random.uniform(1,5))
     return olsparams
 
 #获取实时数据
