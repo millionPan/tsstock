@@ -126,11 +126,11 @@ if st.button('更新实时价格'):
                                       'predict_high','high','diff','status','income',
                                       'buy','quant','range','open_low_corr','open_high_corr']]
                           .sort_values(by=["diff"],ascending=True))
+        latestdata_show.set_index(["name"], inplace=True)
         st.dataframe(latestdata_show)
-        st.write(round(latestdata_show['income'].sum(),2))
+        st.write("total: "+str(round(latestdata_show['income'].sum(),2)))
         st.write("实时数据更新至"+''+latestdata['date'][0]+' '+latestdata['time'][0])
         
     #st.table(latestdata_show)
 else:
     st.write('')
-
