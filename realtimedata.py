@@ -25,6 +25,7 @@ import time
 import random
 import statsmodels.formula.api as smf
 import pandas as pd 
+from datetime import date
 #print(ts.__version__)
            
 symbollist=['600588','600986','600728','600050','000070',
@@ -49,7 +50,7 @@ def get_olsparams(symbollist):
         else:
             codei=i+'.SH'
         #获取历史数据    
-        historydata=pro.daily(ts_code= codei, start_date='20220101').sort_values('trade_date',ascending=True)
+        historydata=pro.daily(ts_code= codei, start_date='20220101', end_date=history_enddate).sort_values('trade_date',ascending=True)
         #historydata=pd.read_csv("H:/tsstock/historycsv/"+'601766'+"_"+'20230330'+".csv")
         #
         model_low = smf.ols("low ~ open-1", historydata).fit()
@@ -97,6 +98,8 @@ def get_have():
     return have
 
 
+date_choose=st.date_input(label="choose",value=date.today())
+history_enddate=date_choose.strftime("%Y%m%d")
 if st.button('更新实时价格'):
         have=get_have()
         olsparams=get_olsparams(symbollist) 
