@@ -17,7 +17,7 @@ st.set_page_config(
 
 # import os
 # st.write(os.getcwd())   #取得当前工作目录
-
+#os.chdir(r'H:\tsstock')
 import tushare as ts
 pro = ts.pro_api('e79d0344d6ac178e4d5973c42b612c9ed776bc47117c49aa9d3d7b24')
 
@@ -41,7 +41,7 @@ symbollist=['600588','600986','600728','600050','000070',
 def get_olsparams(symbollist):    
     #print(model_high.summary())
     olsparams=pd.DataFrame()
-    #os.chdir(r'H:\tsstock')
+  
     for i in symbollist:
         #i='603887'
         if i[0]=='0':
@@ -91,7 +91,9 @@ def get_realtimedata(symbollist):
 @st.cache_data
 def get_have(): 
     with open("./jsondata.txt",encoding='utf-8') as file:
-        have =file.read()
+        havefile =file.read()
+        dictFinal =eval(havefile)
+        have =pd.DataFrame.from_dict(dictFinal, orient='columns')
     have['ts_code']=have.apply(lambda x:x['ts_code']+'.SH' if x['ts_code'][0]=='6' else x['ts_code']+'.SZ', axis=1)
     return have
 
