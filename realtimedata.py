@@ -88,7 +88,6 @@ def get_realtimedata(symbollist):
     return realtimedata
 
 #持有数据 
-@st.cache_data
 def get_have(): 
     with open("./jsondata.txt",encoding='utf-8') as file:
         havefile =file.read()
