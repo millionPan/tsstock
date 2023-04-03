@@ -89,13 +89,9 @@ def get_realtimedata(symbollist):
 
 #持有数据 
 @st.cache_data
-def get_have():   
-    have =pd.DataFrame({
-        'ts_code':['600588','603887','000537','000803','603881','600050','600543','601766'],
-        'buy':[24.017,7.113,13.078,11.963,35.018,5.555,5.710,5.955],
-        'quant':[300,1500,900,400,400,1000,500,1000]
-        }
-      )    
+def get_have(): 
+    with open("./jsondata.txt",encoding='utf-8') as file:
+        have =file.read()
     have['ts_code']=have.apply(lambda x:x['ts_code']+'.SH' if x['ts_code'][0]=='6' else x['ts_code']+'.SZ', axis=1)
     return have
 
