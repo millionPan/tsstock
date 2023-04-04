@@ -39,7 +39,7 @@ symbollist=['600588','600986','600728','600050','000070',
 
 #回归系数及相关系数
 @st.cache_data
-def get_olsparams(symbollist):    
+def get_olsparams(symbollist,history_enddate):    
     #print(model_high.summary())
     olsparams=pd.DataFrame()
   
@@ -102,7 +102,7 @@ date_choose=st.date_input(label="choose",value=date.today())
 history_enddate=date_choose.strftime("%Y%m%d")
 if st.button('更新实时价格'):
         have=get_have()
-        olsparams=get_olsparams(symbollist) 
+        olsparams=get_olsparams(symbollist=symbollist,history_enddate=history_enddate) 
         st.write("历史数据更新至"+olsparams['enddate'][0])
         realtimedata=get_realtimedata(symbollist)
         latestdata=(olsparams
