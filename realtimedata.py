@@ -17,7 +17,7 @@ st.set_page_config(
 
 # import os
 # st.write(os.getcwd())   #取得当前工作目录
-#os.chdir(r'H:\tsstock')
+#os.chdir(r'H:\git_tsstock\tsstock')
 import tushare as ts
 pro = ts.pro_api('e79d0344d6ac178e4d5973c42b612c9ed776bc47117c49aa9d3d7b24')
 
@@ -26,15 +26,14 @@ import random
 import statsmodels.formula.api as smf
 import pandas as pd 
 from datetime import date
-#print(ts.__version__)
+#print(pd.__version__)
            
-symbollist=['600588','600986','600728','600050','000070',
-            '603887','601390','000537',
-            '000803','002236','002415',
-            '002370','600071','603626',
-            '603881','600918','600543',
-            '601766','000526',
-            '603138']
+
+def get_symbollist(): 
+    with open("./symbollist.txt",encoding='utf-8') as file:
+        symbollistfile =file.read()
+        symbollist =eval(symbollistfile)
+    return symbollist
 
 
 #回归系数及相关系数
@@ -90,7 +89,7 @@ def get_realtimedata(symbollist):
 
 #持有数据 
 def get_have(): 
-    with open("./jsondata.txt",encoding='utf-8') as file:
+    with open("./havedata.txt",encoding='utf-8') as file:
         havefile =file.read()
         dictFinal =eval(havefile)
         have =pd.DataFrame.from_dict(dictFinal, orient='columns')
@@ -100,6 +99,7 @@ def get_have():
 
 date_choose=st.date_input(label="choose",value=date.today())
 history_enddate=date_choose.strftime("%Y%m%d")
+symbollist=get_symbollist()
 if st.button('更新实时价格'):
         have=get_have()
         olsparams=get_olsparams(symbollist=symbollist,history_enddate=history_enddate) 
